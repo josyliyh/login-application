@@ -22,21 +22,13 @@ if( isset($_POST['username']) &&
         //add a message to the errors array
         $errorMessages[] = "The username cannot be left blank.";
     }
-    // else if( !in_array($username, REGISTERED_USERS) ){
-    //     $errorMessages[] = "The username '$username' is not one of our registered users.";
-    // }
+ 
     if( empty($password) ){
         //add a message to the errors array
         $errorMessages[] = "The password cannot be left blank.";
     }
-    // else if( $password !== SECRET_PASSWORD){
-    //     $errorMessages[] = "No, sorry. '$password' is not the secret password. (Hint: try 'bcit').";
-    // }    
-
-    // if( count($errorMessages) > 0 ) {
        
-    
-}else{
+} else {
     $errorMessages[] = "Please log in to access the content.";
 }
 
@@ -47,7 +39,7 @@ $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
         die("<p>Could not connect to DB: ".$mysqli->connect_error."</p>");	
     }
 
-$query = "SELECT username, password FROM users;";
+$query = "SELECT username, password FROM users WHERE username='$username';";
 $result = $mysqli->query( $query );
 
 $checkname = 0;
